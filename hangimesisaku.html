@@ -1,76 +1,397 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>班決め君</title>
+  <head>
+    <meta charset="utf-8">
+    <title>チーム決め君</title>
 
-        <!-- 自作スタイルシートのインポート-->
-        <link rel="stylesheet" href="stylesheet.css">
+    <!-- 自作スタイルシートのインポート-->
+    <link rel="stylesheet" href="stylesheet.css">
 
-        <!-- Bootstrapを使うためのお作法-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" cressorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <!-- Bootstrapを使うためのお作法-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  
+    <!-- Vue.jsの読み込み-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-        <!-- Vue.jsの読み込み-->
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <!-- p5jsの読み込み-->
-        <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+    <!-- p5jsの読み込み-->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+    
+  
+  </head>
+  <body>
+    <!--ヘッダー-->
+    <div class="header">
+      <div class="header-logo">チーム決め君</div>
+      <div class="header-list">
+        <ul>
+          <li>バレーボール！</li>
+          <li>6人制！</li>
+        </ul>
+      </div>
+    </div>
 
-
-
-    </head>
-    <body>
-        <!--ヘッダー-->
-        <div class="header">
-            <div class="header-logo">班決め君</div>
-            <div class="header-list">
-                <ul>
-                    <li>同期で飲み会！</li>
-                    <li>先輩と飲み会！</li>
-                </ul>
+    <!--Bootstrapのアコーディオンを利用-->        
+    <div class="accordion" id="accordionExample">
+      <div class="input">
+        <!--班の数指定カード-->
+        <div class="input-float">
+          <div class="card" style = "width:18rem;">
+            <div class="card-header" id="headingOne">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  <h3 class="section-title">班</h3>
+                </button>
+              </h2>
             </div>
-        </div>
 
-        <!--Bootstrapのアコーディオンを利用-->
-        <div class="accorion" id="accordionExample">
-            <div class="input">
-                <!--班の数指定カード-->
-                <div class="input-float">
-                    <div class="card" style = "width:18rem;">
-                        <div class="card-header" id="headingOne>
-                            <h2 class="m-0">
-                                <button class="btn tn-link tn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    <h3 class="section-title">班</h3>
-                                </button>
-                            </h2>
-                        </div>
-
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <div class="card-body">
-                                <!---4人班の数を選ぶボタン-->
-                                <div class = "condition-items">
-                                    <p>最大4人班</p>
-                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn btn-secondary active">
-                                            <input type="radio" name="yoninseki" id="option0" checked> 0
-                                        </label>
-                                        <label class="btn btn-secondary">
-                                            <input type="radio" name="yoninseki" id="option1" disabled> 1
-                                        </label>
-                                        <label class="btn btn-secondary">
-                                            <input type="radio" name="yoninseki" id="option2" disabled> 2
-                                        </label>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body">
+                <!--4人班の数を選ぶボタン-->
+                <div class = "condition-items">
+                  <p>最大4人班</p>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                      <input type="radio" name="yoninseki" id="option0" checked> 0
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="yoninseki" id="option1" disabled> 1
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="yoninseki" id="option2" disabled> 2
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="yoninseki" id="option3" disabled> 3
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="yoninseki" id="option4" disabled> 4
+                    </label>
+                  </div>
                 </div>
+                
+                <!--6人班の数を選ぶボタン-->
+                <div class = "condition-items">
+                  <p>最大6人班</p>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                      <input type="radio" name="rokuninseki" id="option0" value=0 disabled> 0
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="rokuninseki" id="option1" value=1 disabled> 1
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="rokuninseki" id="option2" value=2 checked> 2
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="rokuninseki" id="option3" value=3> 3
+                    </label> 
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="rokuninseki" id="option4" value=4> 4
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      
+        <!--メンバーを選ぶカード-->
+        <div class="input-float">  
+          <div class="card" style = "width:36rem;">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <h3 class="section-title">メンバー</h3>
+                </button>
+              </h2>
+            </div>
+          </div>
 
-    </body>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+              <!--Veu.jsを使ってみる-->
+              <div id="app">
+                <div v-for="todo in todos">
+                  <!--todoの中に書いてある人と、その人数を選ぶボタンをv-forで表示しまくる-->
+                  <div class = "condition-items">
+                    {{todo.text}}:
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-secondary active">
+                        <input type="radio" :name="todo.name" id="option0" value=0> 0
+                      </label>
+                      <label class="btn btn-secondary">
+                        <input type="radio" :name="todo.name" id="option1" value=1> 1
+                      </label>
+                      <label class="btn btn-secondary">
+                        <input type="radio" :name="todo.name" id="option2" value=2> 2
+                      </label>
+                      <label class="btn btn-secondary">
+                        <input type="radio" :name="todo.name" id="option3" value=3> 3
+                      </label>
+                      <label class="btn btn-secondary">
+                        <input type="radio" :name="todo.name" id="option4" value=4> 4
+                      </label>
+                      <label class="btn btn-secondary">
+                        <input type="radio" :name="todo.name" id="option5" value=5> 5
+                      </label>
+                      <label class="btn btn-secondary">
+                        <input type="radio" :name="todo.name" id="option6" value=6> 6
+                      </label>
+                      <label class="btn btn-secondary">
+                        <input type="radio" :name="todo.name" id="option7" value=7> 7
+                      </label>
+                      <label class="btn btn-secondary">
+                        <input type="radio" :name="todo.name" id="option8" value=8> 8
+                      </label>
+                      <label class="btn btn-secondary">
+                        <input type="radio" :name="todo.name" id="option9" value=9> 9
+                      </label>
+                      <label class="btn btn-secondary">
+                        <input type="radio" :name="todo.name" id="option10" value=10> 10
+                      </label>                      
+                    </div>
+                  </div> 
+                </div>
+              </div>
+              <input class="contact-submit" type="submit" value="GO" onclick="getMembers()">
+            </div>
+          </div>
+        </div>
+        
+        
 
+        </div>
+      </div>
+      <!--floatをclearするためだけのdiv-->
+      <div class = "contents">
+      </div>
+
+      <!--ここからスクリプト-->
+      <!--Vue.jsの部分-->
+      <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          todos: [
+            {"text":'偉い男',"name":"upman"},
+            {"text":'偉い女',"name":"upwoman"},
+            {"text":'先輩男',"name":"man"},
+            {"text":'先輩女',"name":"woman"},
+            {"text":'新人男',"name":"newman"},
+            {"text":'新人女',"name":"newwoman"}
+        ]}
+      })
+      </script>
+
+      <!--席決め処理-->
+      <script language="javascript" type="text/javascript">
+        //指定した条件を取り出し、席配置をする処理
+        function getMembers() {
+          //描画領域の更新
+          setup();
+
+          //各パラメータ
+          let valuelist = [];
+          let idlist = ["upman","man","newman","upwoman","woman","newwoman"]
+
+          //各idのどこにcheckされているかを調べ、条件を取得する
+          for (i=0;i<idlist.length;i++){
+            value = 0
+            console.log(idlist[i]);
+            var input = document.getElementsByName(idlist[i]);
+
+            for (j=0;j<input.length;j++){
+              if (input[j].checked){
+                value = input[j].value;
+              }
+            }
+            valuelist.push(value);
+          }
+
+          //条件に応じてリストに人をpush。tablelist=["偉男","偉女","偉女"]など
+          tablelist = makegroup(valuelist)
+          
+          //今回は六人席のみ情報取り出し
+          let tableinput = document.getElementsByName("rokuninseki");
+          let numoftable = 2;
+          for (j=0;j<tableinput.length;j++){
+            if (tableinput[j].checked){
+              numoftable = tableinput[j].value;
+            }
+          }
+          
+          //六人席に配置する
+          maketable(tablelist, numoftable);
+        }     
+        
+        //条件をもとに実際に人をリストにぶち込む処理
+        function makegroup(valuelist){
+          let prefixlist = ["偉男","先男","新男","偉女","先女","新女"]
+          let allmembers = []
+          for (i=0;i<6;i++){
+            num = valuelist[i];
+            for(j=0; j<num;j++){
+              allmembers.push(prefixlist[i]);
+            }
+          }
+          //allmembers = ["偉男","偉女","偉女","先女"]など
+          console.log(allmembers);
+          
+          //allmembersをそのまま配置するとランダム性が無くてつまらないのでランダム性追加
+          tablelist = []
+          //allmembersがspliceにより長さ0になるまで処理
+          for (i=0;i<allmembers.length;i=i){
+            //4人より少ない場合は全体からランダムで取り出しpush
+            if (allmembers.length<4){
+              num = Math.floor(Math.random()*allmembers.length);
+              tablelist.push(allmembers[num]);
+              allmembers.splice(num,1);
+            //4人より多い場合は、頭の4人からランダムに取り出しpush
+            }else if (allmembers.length >=4){
+              num = Math.floor(Math.random()*4);
+              tablelist.push(allmembers[num]);
+              allmembers.splice(num,1);
+            }else{
+              console.log(何かがおかしい);
+            }
+          }
+          //これで身分の偏り・性別の偏りを維持しつつ若干のランダム性を追加できた
+          return tablelist;
+        }
+      
+      //画面更新の度に実行、描画範囲の新規作成
+      function setup() {
+        // Create the canvas
+        createCanvas(920, 300);
+        background(235);
+
+        // Set colors
+        fill(126, 149, 230, 127);
+        stroke(0, 0, 0);
+        for (i = 0;i<4;i++){
+          rect(40+i*210, 70, 180, 70);
+        }
+      }
+
+      //テーブルに描画していく
+      function maketable(tablelist,numoftable){
+        // A rectangle x座標、y座標,横,縦
+        // An ellipse
+        textSize(24);
+        textAlign(CENTER);
+
+        //ひたすら一人ずつ配置(テーブル左上)
+        for (i=0;tablelist.length != 0 && i<numoftable ;i++){     
+          gender = tablelist[0].substr(1,1);
+          //「偉男」の二文字目を取り出し、男女によって色を変える
+          if (gender=="男"){
+            fill(126, 149, 230, 127);
+            console.log("男や");
+          }else if (gender=="女"){
+            fill(255, 140, 255 , 127);
+            console.log("女や");
+          }
+          
+          //「偉男」の一文字目を取り出し描画
+          mibun = tablelist[0].substr(0,1);
+          ellipse(75+i*210, 40, 40, 40);
+          text(mibun, 75+i*210, 50);
+          tablelist.shift();
+          console.log(tablelist);
+        }
+
+        //テーブル右上
+        for (i=0;tablelist.length != 0 && i<numoftable ;i++){     
+          gender = tablelist[0].substr(1,1);
+          if (gender=="男"){
+            fill(126, 149, 230, 127);
+            console.log("男や");
+          }else if (gender=="女"){
+            fill(255, 140, 255 , 127);
+            console.log("女や");
+          }
+          
+          mibun = tablelist[0].substr(0,1);
+          ellipse(185+i*210, 40, 40, 40);
+          text(mibun, 185+i*210, 50);
+          tablelist.shift();
+          console.log(tablelist);
+        }
+
+        //テーブル左下
+        for (i=0;tablelist.length != 0 && i<numoftable ;i++){     
+          gender = tablelist[0].substr(1,1);
+          if (gender=="男"){
+            fill(126, 149, 230, 127);
+            console.log("男や");
+          }else if (gender=="女"){
+            fill(255, 140, 255 , 127);
+            console.log("女や");
+          }
+          
+          mibun = tablelist[0].substr(0,1);
+          ellipse(75+i*210, 170, 40, 40);
+          text(mibun, 75+i*210, 180);
+          tablelist.shift();
+          console.log(tablelist);
+        }
+        
+        //テーブル右下
+        for (i=0;tablelist.length != 0 && i<numoftable ;i++){     
+          gender = tablelist[0].substr(1,1);
+          if (gender=="男"){
+            fill(126, 149, 230, 127);
+            console.log("男や");
+          }else if (gender=="女"){
+            fill(255, 140, 255 , 127);
+            console.log("女や");
+          }
+          
+          mibun = tablelist[0].substr(0,1);
+          ellipse(185+i*210, 170, 40, 40);
+          text(mibun, 185+i*210, 180);
+          tablelist.shift();
+          console.log(tablelist);
+        }
+        
+        //テーブル中央上
+        for (i=0;tablelist.length != 0 && i<numoftable ;i++){     
+          gender = tablelist[0].substr(1,1);
+          if (gender=="男"){
+            fill(126, 149, 230, 127);
+            console.log("男や");
+          }else if (gender=="女"){
+            fill(255, 140, 255 , 127);
+            console.log("女や");
+          }
+          
+          mibun = tablelist[0].substr(0,1);
+          ellipse(130+i*210, 40, 40, 40);
+          text(mibun, 130+i*210, 50);
+          tablelist.shift();
+          console.log(tablelist);
+        }
+
+        //テーブル中央下
+        for (i=0;tablelist.length != 0 && i<numoftable ;i++){     
+          gender = tablelist[0].substr(1,1);
+          if (gender=="男"){
+            fill(126, 149, 230, 127);
+            console.log("男や");
+          }else if (gender=="女"){
+            fill(255, 140, 255 , 127);
+            console.log("女や");
+          }
+          
+          mibun = tablelist[0].substr(0,1);
+          ellipse(130+i*210, 170, 40, 40);
+          text(mibun, 130+i*210, 180);
+          tablelist.shift();
+          console.log(tablelist);
+        }       
+      }
+    </script>
+  </body>
 </html>
